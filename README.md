@@ -120,7 +120,7 @@ I would like to thank my coding partner [@fuadmoin](https://github.com/fuadmoin)
 
 ## 📝 License <a name="license"></a>
 
-This project is [MIT](./MIT.md) licensed.
+This project is [MIT](./LICENSE.md) licensed.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 <a name="readme-top"></a>

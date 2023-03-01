@@ -1,0 +1,79 @@
+#container {
+  left: 30%;
+  position: relative;
+  top: 50px;
+  width: 30%;
+  border: 1px solid wheat;
+  padding: 20px 20px 0 20px;
+}
+
+.title {
+  display: block;
+  font-size: 24px;
+}
+
+.refresh {
+  float: right;
+  position: relative;
+  top: 3px;
+}
+
+.inputText {
+  margin-top: 15px;
+  width: 108%;
+  height: 40px;
+  position: relative;
+  left: -20px;
+  font-size: 18px;
+  border: 1px solid wheat;
+  border-left: none;
+  border-right: none;
+}
+
+::placeholder {
+  font-style: italic;
+  position: relative;
+  left: 15px;
+}
+
+.todo-item {
+  text-decoration: none;
+  min-height: 27px;
+  width: 105%;
+  border-bottom: 1px solid wheat;
+  list-style: none;
+  font-size: 20px;
+  padding: 13px 10px;
+  left: -20px;
+  position: relative;
+}
+
+.option {
+  float: right;
+}
+
+.delete {
+  display: none;
+}
+
+.items {
+  margin-left: 15px;
+  top: 5px;
+}
+
+.select {
+  display: block;
+}
+
+.delete-all {
+  height: 50px;
+  width: 109%;
+  position: relative;
+  top: 0;
+  left: -20px;
+  border-style: none;
+}
+
+h1 {
+  text-align: center;
+}
