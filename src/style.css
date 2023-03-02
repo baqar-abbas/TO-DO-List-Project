@@ -54,6 +54,14 @@
 
 .delete {
   display: none;
+  width: 15px;
+  height: 15px;
+}
+
+.edit {
+  display: none;
+  width: 15px;
+  height: 15px;
 }
 
 .items {
