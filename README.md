@@ -48,7 +48,7 @@ HTML CSS and JavaScript
 
 ## 🚀 Live Demo <a name="live-demo"> </a>
 
-> The website will be hosted in the future.
+> https://baqar-abbas.github.io/TO-DO-List-Project/dist/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
