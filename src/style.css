@@ -85,3 +85,8 @@
 h1 {
   text-align: center;
 }
+
+.items {
+  border: none;
+}
+

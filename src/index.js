@@ -1,11 +1,9 @@
 import './style.css';
+import { addTask, todoItems } from './todo.js';
 import select2 from '../images/select.png';
 import delete2 from '../images/delete.png';
 import refresh from '../images/refresh.png';
 import edit from '../images/edit.jpg';
-
-// Load tasks from local storage, or use an empty array if none exists
-const todoItems = JSON.parse(localStorage.getItem('todoItems')) || [];
 
 const container = document.getElementById('container');
 const form = document.querySelector('form');
@@ -25,16 +23,6 @@ btnDeleteAll.setAttribute('class', 'delete-all');
 btnDeleteAll.textContent = 'Clear all completed';
 container.append(btnDeleteAll);
 
-const addTask = (text) => {
-  const newTask = {
-    text,
-    completed: false,
-    index: todoItems.length + 1,
-  };
-  todoItems.push(newTask);
-  localStorage.setItem('todoItems', JSON.stringify(todoItems));
-};
-
 const display = () => {
   todoItems.sort((a, b) => a.index - b.index);
   ul.innerHTML = ''; // clear the list before re-rendering it
@@ -42,6 +30,7 @@ const display = () => {
     const node = document.createElement('li');
     node.setAttribute('class', 'todo-item');
     node.setAttribute('data-key', todoItems[i].index);
+    node.setAttribute('class', 'todo-item editable');
 
     node.innerHTML = ` 
         <input class="checkbox" id="${todoItems[i].index}" type="checkbox"/>
@@ -50,7 +39,8 @@ const display = () => {
             <img class="delete" src=${delete2} alt=""/>
             <img class="edit" src=${edit} alt="edittext"/>
         </label>
-        <span class="items">${todoItems[i].text}</span>
+        <input class="items" type="text" value="${todoItems[i].text}" readonly />
+
     `;
     ul.append(node);
 
@@ -81,17 +71,36 @@ const display = () => {
       display();
     });
 
-    // Add event listener for editing a task
     editoption.addEventListener('click', () => {
       const itemKey = parseInt(node.getAttribute('data-key'), 10);
       const itemIndex = todoItems.findIndex((item) => item.index === itemKey);
-      const currentTaskText = todoItems[itemIndex].text; // get the current task text
-      const newTaskText = prompt('Please enter the new task description:', currentTaskText); // pre-fill prompt with current task text
-      if (newTaskText !== null && newTaskText !== '') {
-        todoItems[itemIndex].text = newTaskText;
-        localStorage.setItem('todoItems', JSON.stringify(todoItems));
-        display();
+
+      // Toggle the readonly attribute on the input element
+      const inputElement = node.querySelector('.items');
+      inputElement.readOnly = !inputElement.readOnly;
+
+      // Toggle the editable class on the li element
+      node.classList.toggle('editable');
+
+      // If the input element is now editable, focus on it
+      if (!inputElement.readOnly) {
+        inputElement.focus();
       }
+
+      // If the user presses the Enter key while editing the input element, update the task text
+      inputElement.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          const newTaskText = inputElement.value;
+          todoItems[itemIndex].text = newTaskText;
+          localStorage.setItem('todoItems', JSON.stringify(todoItems));
+          display();
+        }
+      });
+
+      // Add an event listener to the input element to toggle the editable class on the li element
+      inputElement.addEventListener('blur', () => {
+        node.classList.remove('editable');
+      });
     });
   }
 };
@@ -106,7 +115,7 @@ form.addEventListener('submit', (e) => {
   if (text !== '') {
     addTask(text);
     inputText.value = '';
-    ul.innerHTML = ''; // clear the list before re-rendering it
+    ul.innerHTML = '';
     display();
   }
 });
