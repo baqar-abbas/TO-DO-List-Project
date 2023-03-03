@@ -67,6 +67,7 @@
 .items {
   margin-left: 15px;
   top: 5px;
+  border: none;
 }
 
 .select {
@@ -85,8 +86,3 @@
 h1 {
   text-align: center;
 }
-
-.items {
-  border: none;
-}
-
