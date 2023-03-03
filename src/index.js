@@ -1,5 +1,6 @@
 import './style.css';
 import { addTask, todoItems } from './todo.js';
+import updateCompletedStatus from './status.js';
 import select2 from '../images/select.png';
 import delete2 from '../images/delete.png';
 import refresh from '../images/refresh.png';
@@ -18,6 +19,7 @@ placeholder="Add to your list..."
 type="text"
 />
 `;
+
 const btnDeleteAll = document.createElement('button');
 btnDeleteAll.setAttribute('class', 'delete-all');
 btnDeleteAll.textContent = 'Clear all completed';
@@ -48,6 +50,38 @@ const display = () => {
     const selectdots = node.querySelector('.select');
     const deleteoption = node.querySelector('.delete');
     const editoption = node.querySelector('.edit');
+    // Get the checkbox element for this task
+    const checkbox = node.querySelector('.checkbox');
+
+    // Add event listener for completing a task
+    checkbox.addEventListener('change', () => {
+      const itemKey = parseInt(node.getAttribute('data-key'), 10);
+      const completed = checkbox.checked;
+      updateCompletedStatus(itemKey, completed);
+      // Find the text element for this task
+      //   const textElement = node.querySelector('.items');
+      // Add line-through style to the text when checkbox is checked
+      if (completed) {
+        node.querySelector('.items').style.textDecoration = 'line-through';
+      } else {
+        node.querySelector('.items').style.textDecoration = 'none';
+      }
+    });
+
+    const clearCompletedTasks = () => {
+      const uncompletedTasks = todoItems.filter((item) => !item.completed);
+      todoItems.length = 0;
+      todoItems.push(...uncompletedTasks);
+      for (let i = 0; i < uncompletedTasks.length; i += 1) {
+        uncompletedTasks[i].index = i + 1;
+      }
+      localStorage.setItem('todoItems', JSON.stringify(todoItems));
+      display();
+    };
+
+    btnDeleteAll.addEventListener('click', () => {
+      clearCompletedTasks();
+    });
 
     // Add event listeners to show the delete/edit options when the user clicks on the selectdots
     selectdots.addEventListener('click', () => {
