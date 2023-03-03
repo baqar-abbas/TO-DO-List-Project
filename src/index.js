@@ -59,7 +59,6 @@ const display = () => {
       const completed = checkbox.checked;
       updateCompletedStatus(itemKey, completed);
       // Find the text element for this task
-      //   const textElement = node.querySelector('.items');
       // Add line-through style to the text when checkbox is checked
       if (completed) {
         node.querySelector('.items').style.textDecoration = 'line-through';
