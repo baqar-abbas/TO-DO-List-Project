@@ -96,7 +96,7 @@ This Project will be deployed after final approval.
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **[java script will be added ]**
+- [ ] **[Functionality of clearing multiple tasks will be implemented on clear all completed button]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

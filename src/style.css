@@ -54,11 +54,20 @@
 
 .delete {
   display: none;
+  width: 15px;
+  height: 15px;
+}
+
+.edit {
+  display: none;
+  width: 15px;
+  height: 15px;
 }
 
 .items {
   margin-left: 15px;
   top: 5px;
+  border: none;
 }
 
 .select {
