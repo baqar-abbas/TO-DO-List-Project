@@ -1,4 +1,6 @@
-const { addTask, todoItemstest, removeTask } = require('./add.js');
+const {
+  addTask, todoItemstest, removeTask, editTask,
+} = require('./add.js');
 
 describe('Add Task', () => {
   test('Initial length of array should be 0', () => {
@@ -27,5 +29,24 @@ describe('Remove Task', () => {
     const removedTask = removeTask(nonExistingTask);
     expect(todoItemstest.length).toBe(1);
     expect(removedTask).toBeNull();
+  });
+});
+
+describe('Edit Task', () => {
+  test('Edit an existing task in the array', () => {
+    const oldTask = 'text1';
+    const newTask = 'text2';
+    addTask(oldTask);
+    const editedTask = editTask(oldTask, newTask);
+    expect(todoItemstest.length).toBe(2);
+    expect(editedTask).toBe(newTask);
+  });
+
+  test('Edit a non-existing task in the array', () => {
+    const oldTask = 'text1';
+    const newTask = 'text2';
+    const editedTask = editTask(oldTask, newTask);
+    expect(todoItemstest.length).toBe(2);
+    expect(editedTask).toBe(editedTask);
   });
 });

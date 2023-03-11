@@ -15,4 +15,15 @@ const removeTask = (text) => {
   return null;
 };
 
-module.exports = { addTask, todoItemstest, removeTask };
+const editTask = (oldText, newText) => {
+  const index = todoItemstest.indexOf(oldText);
+  if (index > -1) {
+    todoItemstest[index] = newText;
+    return newText;
+  }
+  return null;
+};
+
+module.exports = {
+  addTask, todoItemstest, removeTask, editTask,
+};
